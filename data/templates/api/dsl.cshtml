@@ -6,7 +6,7 @@
 <div class="panel panel-success">
 	<div class="panel-heading"><b>Table of Content</b></div>
 	<ul class="list-group">
-		@foreach(var item in @Model.Tree)
+		@foreach(var item in @Model.Tree.OrderBy(k => k.Key))
 		{
 	    	<a class="list-group-item" href="#@Content.MakeAnchorIdentifier(item.Key)">@item.Key</a>
 	    }
@@ -14,14 +14,14 @@
 </div>
 
 <!-- DSL CATEGORIES -->
-@foreach(var item in @Model.Tree)
+@foreach(var item in @Model.Tree.OrderBy(k => k.Key))
 {
 	<!-- Anchor link to section -->
 	<a name="@Content.MakeAnchorIdentifier(@item.Key)"></a>
 	
 	<div class="panel panel-default">
 		<div class="panel-heading"><b>@item.Key</b></div>
-		@foreach(var subCategory in item.Value)		
+		@foreach(var subCategory in item.Value.OrderBy(k => k.Key))		
 		{
 			<!-- DSL SUB CATEGORIES -->
 			if(!string.IsNullOrWhiteSpace(@subCategory.Key))
