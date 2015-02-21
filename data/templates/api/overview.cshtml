@@ -1,0 +1,17 @@
+<div class="alert alert-info">
+	<p>Here you can find information about all types, properties and methods available from a Cake script.</p>
+</div>
+
+<!-- ASSEMBLIES -->
+@foreach(var assembly in Model.Assemblies)
+{
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>@Documentation.AssemblyName(assembly)</b></div>
+		<ul class="list-group">
+		    @foreach(var @namespace in assembly.Namespaces.OrderBy(x => x.Identity))
+		    {
+		    	<li class="list-group-item">@Documentation.Link(@namespace)</li>
+		    }
+		</ul>
+	</div>
+}

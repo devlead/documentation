@@ -1,0 +1,49 @@
+<div class="alert alert-info">
+	<p>Here you can find information about Cake alias methods and properties.</p>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="panel panel-success">
+	<div class="panel-heading"><b>Table of Content</b></div>
+	<ul class="list-group">
+		@foreach(var item in @Model.Tree)
+		{
+	    	<a class="list-group-item" href="#@Content.MakeAnchorIdentifier(item.Key)">@item.Key</a>
+	    }
+	</ul>	    
+</div>
+
+<!-- DSL CATEGORIES -->
+@foreach(var item in @Model.Tree)
+{
+	<!-- Anchor link to section -->
+	<a name="@Content.MakeAnchorIdentifier(@item.Key)"></a>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>@item.Key</b></div>
+		@foreach(var subCategory in item.Value)		
+		{
+			<!-- DSL SUB CATEGORIES -->
+			if(!string.IsNullOrWhiteSpace(@subCategory.Key))
+	    	{    	
+				<ul class="list-group">
+					<li class="list-group-item list-group-item-info">@subCategory.Key</li>
+				</ul>
+			}
+
+			<!-- DSL METHODS -->
+			<table class="table table-bordered table-striped">
+			    <tbody>
+			    	@foreach(var method in subCategory.Value)	
+			    	{
+			        <tr>
+			            <td class="col-md-3">@Documentation.DslLink(method)</td>
+			            <td class="col-md-1">@Documentation.DslType(method)</td>
+			            <td class="col-md-8">@Documentation.Comment(method.Summary)</td>
+			        </tr>		    	
+			        }
+			    </tbody>
+			</table>	
+		}			
+	</div>
+}

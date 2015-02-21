@@ -1,0 +1,142 @@
+<!-- INHERITANCE -->
+
+<!-- SUMMARY -->
+@if(@Model.Summary != null)
+{
+	<div class="alert alert-info">
+		<p>@Documentation.Comment(@Model.Summary)</p>
+	</div>
+}
+
+<!-- SYNTAX -->
+<div class="panel panel-default">
+	<div class="panel-heading"><b>Syntax</b></div>
+	<div class="panel-body">
+		<pre><code class="language-cs">@Documentation.Syntax(@Model.Type)</code></pre>
+	</div>
+</div>	
+
+<!-- CONSTRUCTOR TABLE -->
+@if(Model.Constructors.Count > 0) 
+{
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Constructors</b></div>
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th class="col-md-3">Name</th>
+		            <th class="col-md-9">Description</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    	@foreach(var method in Model.Constructors.OrderBy(x => x.Identity))
+		    	{
+			        <tr>
+			            <td>@Documentation.Link(method)</td>
+			            <td>@Documentation.Comment(method.Summary)</td>
+			        </tr>
+		    	}
+		    </tbody>
+		</table>
+	</div>
+}
+
+<!-- PROPERTY TABLE -->
+@if(Model.Properties.Count > 0) 
+{
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Properties</b></div>
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th class="col-md-3">Name</th>
+		            <th class="col-md-9">Description</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    	@foreach(var property in Model.Properties.OrderBy(x => x.Identity))
+		    	{
+			        <tr>
+			            <td>@Documentation.Link(property)</td>
+			            <td>@Documentation.Comment(property.Summary)</td>
+			        </tr>
+		    	}
+		    </tbody>
+		</table>
+	</div>
+}
+
+<!-- METHOD TABLE -->
+@if(Model.Methods.Count > 0) 
+{
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Methods</b></div>
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th class="col-md-3">Name</th>
+		            <th class="col-md-9">Description</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    	@foreach(var method in Model.Methods.OrderBy(x => x.Identity))
+		    	{
+			        <tr>
+			            <td>@Documentation.Link(method)</td>
+			            <td>@Documentation.Comment(method.Summary)</td>
+			        </tr>
+		    	}
+		    </tbody>
+		</table>
+	</div>
+}
+
+<!-- OPERATOR TABLE -->
+@if(Model.Operators.Count > 0) 
+{
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Operators</b></div>
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th class="col-md-3">Name</th>
+		            <th class="col-md-9">Description</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    	@foreach(var method in Model.Operators.OrderBy(x => x.Identity))
+		    	{
+			        <tr>
+			            <td>@Documentation.Link(method)</td>
+			            <td>@Documentation.Comment(method.Summary)</td>
+			        </tr>
+		    	}
+		    </tbody>
+		</table>
+	</div>
+}
+
+<!-- EXTENSION METHOD TABLE -->
+@if(Model.ExtensionMethods.Count > 0) 
+{
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Extension methods</b></div>
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th class="col-md-3">Name</th>
+		            <th class="col-md-9">Description</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    	@foreach(var method in Model.ExtensionMethods.OrderBy(x => x.Definition.Name))
+		    	{
+			        <tr>
+			            <td>@Documentation.Link(method)</td>
+			            <td>@Documentation.Comment(method.Summary)</td>
+			        </tr>
+		    	}
+		    </tbody>
+		</table>
+	</div>
+}

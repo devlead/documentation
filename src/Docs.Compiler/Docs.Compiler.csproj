@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{941CACE0-0FB0-4A98-BB0C-577C3C3DFED3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Docs.Compiler</RootNamespace>
+    <AssemblyName>Docs.Compiler</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Docs.Compiler.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="CLAP">
+      <HintPath>..\packages\CLAP.4.6\lib\net35\CLAP.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownDeep, Version=1.5.4615.26275, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MarkdownDeep.NET.1.5\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.XmlTransform, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.6.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RazorEngine.3.6.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application.cs" />
+    <Compile Include="CompilerModule.cs" />
+    <Compile Include="Configuration\ApplicationConfiguration.cs" />
+    <Compile Include="Configuration\ApplicationConfigurationReader.cs" />
+    <Compile Include="Generators\ApiContentGenerator.cs" />
+    <Compile Include="Generators\Api\ApiContentBuilder.cs" />
+    <Compile Include="Generators\Api\ApiContext.cs" />
+    <Compile Include="Generators\Api\ApiUrlResolver.cs" />
+    <Compile Include="Generators\Api\Builders\DslOverviewContentBuilder.cs" />
+    <Compile Include="Generators\Api\Builders\ApiOverviewContentBuilder.cs" />
+    <Compile Include="Generators\Api\Builders\MethodContentBuilder.cs" />
+    <Compile Include="Generators\Api\Builders\PropertyContentBuilder.cs" />
+    <Compile Include="Generators\Api\Builders\TypeContentBuilder.cs" />
+    <Compile Include="Generators\Api\Builders\NamespaceContentBuilder.cs" />
+    <Compile Include="Generators\StaticContentGenerator.cs" />
+    <Compile Include="Generators\Static\StaticPage.cs" />
+    <Compile Include="Generators\Static\StaticPageParser.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>    
+    <Compile Include="Templating\ApiTemplate.cs" />
+    <Compile Include="Templating\ApiTemplateEngine.cs" />
+    <Compile Include="Templating\DocumentationHelper.cs" />
+    <Compile Include="Templating\Helpers\LinkHelpers.cs" />
+    <Compile Include="Templating\Helpers\CommentHelpers.cs" />
+    <Compile Include="Templating\Helpers\NameHelpers.cs" />
+    <Compile Include="Templating\Helpers\DslHelpers.cs" />
+    <Compile Include="Templating\Helpers\SyntaxHelpers.cs" />
+    <Compile Include="Text\CommentRenderer.cs" />
+    <Compile Include="Text\CommentRendererContext.cs" />
+    <Compile Include="Text\MethodRenderer.cs" />
+    <Compile Include="Text\SignatureRenderer.cs" />
+    <Compile Include="Text\TypeRenderer.cs" />
+    <Compile Include="ViewModels\Api\ApiViewModel.cs" />
+    <Compile Include="ViewModels\LayoutViewModel.cs" />
+    <Compile Include="ViewModels\Api\DslOverviewViewModel.cs" />
+    <Compile Include="ViewModels\Api\MethodViewModel.cs" />
+    <Compile Include="ViewModels\Api\NamespaceViewModel.cs" />
+    <Compile Include="ViewModels\Api\ApiOverviewViewModel.cs" />
+    <Compile Include="ViewModels\Api\PropertyViewModel.cs" />
+    <Compile Include="ViewModels\Api\TypeViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Docs.Compiler.Core\Docs.Compiler.Core.csproj">
+      <Project>{be040a11-c729-46d1-884d-57b28ba631c6}</Project>
+      <Name>Docs.Compiler.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sparrow\Sparrow.csproj">
+      <Project>{b16e4d1d-3b29-4777-b679-3fdebf7bfc65}</Project>
+      <Name>Sparrow</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

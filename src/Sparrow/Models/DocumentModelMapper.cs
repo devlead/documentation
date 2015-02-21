@@ -1,0 +1,185 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using Sparrow.Models.Comments;
+using Sparrow.Models.Documentation;
+using Sparrow.Models.Reflection;
+using Sparrow.Models.Xml;
+
+namespace Sparrow.Models
+{
+    /// <summary>
+    /// Responsible for mapping a reflection and a xml documentation model.
+    /// </summary>
+    internal static class DocumentModelMapper
+    {
+        /// <summary>
+        /// Generates a document model from a <see cref="ReflectionModel"/>
+        /// and a <see cref="XmlDocumentationModel"/>.
+        /// </summary>
+        /// <param name="reflectionModel">The reflection model.</param>
+        /// <param name="xmlModel">The XML documentation model.</param>
+        /// <returns>A document model.</returns>
+        public static DocumentModel Map(ReflectionModel reflectionModel, XmlDocumentationModel xmlModel)
+        {
+            var assemblies = new List<DocumentedAssembly>();
+            
+            // Iterate all assemblies.
+            foreach (var assembly in reflectionModel.Assemblies)
+            {
+                assemblies.Add(MapAssembly(assembly, xmlModel));
+            }
+
+            return new DocumentModel(assemblies);
+        }
+
+        private static DocumentedAssembly MapAssembly(IAssemblyInfo assembly, XmlDocumentationModel model)
+        {
+            var types = new List<DocumentedType>();
+
+            // Iterate all types in assembly.
+            foreach (var type in assembly.Types)
+            {
+                var documentedType = MapType(type, model);
+                types.Add(documentedType);
+
+                // Add a reference to the type for every constructor.
+                foreach (var constructor in documentedType.Constructors)
+                {
+                    constructor.Type = documentedType;
+                }
+
+                // Add a reference to the type for every property.
+                foreach (var property in documentedType.Properties)
+                {
+                    property.Type = documentedType;
+                }
+                
+                // Add a reference to the type for every method.
+                foreach (var method in documentedType.Methods)
+                {
+                    method.Type = documentedType;
+                }
+            }
+
+            // Now group all the types in this assembly by their namespace.
+            var namespaces = new List<DocumentedNamespace>();
+            var namespaceGroups = types.GroupBy(x => x.Definition.Namespace);
+            foreach (var namespaceGroup in namespaceGroups)
+            {
+                // Create a namespace for each grouping.
+                var @namespace = new DocumentedNamespace(namespaceGroup.Key, namespaceGroup);
+                namespaces.Add(@namespace);
+
+                // Connect the types in this namespace to the namespace.
+                foreach (var documentedType in namespaceGroup)
+                {
+                    documentedType.Namespace = @namespace;
+                }
+            }
+
+            // Create an documented assembly out of it.
+            var documentedAssembly = new DocumentedAssembly(assembly, namespaces);
+
+            // Add the documented assembly as a parent of all namespaces.
+            foreach (var @namespace in namespaces)
+            {
+                @namespace.Assembly = documentedAssembly;
+            }
+
+            // Return the documented assembly.
+            return documentedAssembly;
+        }
+
+        private static DocumentedType MapType(ITypeInfo type, XmlDocumentationModel xmlModel)
+        {
+            SummaryComment summary = null;
+            RemarksComment remarks = null;
+            ExampleComment example = null;
+
+            // Get the documentation for the type.
+            var member = xmlModel.Find(type.Identity);
+            if (member != null)
+            {
+                // Get the comments for the type.
+                summary = member.Comments.OfType<SummaryComment>().SingleOrDefault();
+                remarks = member.Comments.OfType<RemarksComment>().SingleOrDefault();
+                example = member.Comments.OfType<ExampleComment>().SingleOrDefault();
+            }
+
+            // Map the type methods.
+            var methods = new List<DocumentedMethod>();
+            foreach (var method in type.Methods)
+            {
+                methods.Add(MapMethod(method, xmlModel));
+            }
+
+            // Map the type properties.
+            var properties = new List<DocumentedProperty>();
+            foreach (var property in type.Properties)
+            {
+                properties.Add(MapProperty(property, xmlModel));
+            }
+
+            // Return the documented type.
+            return new DocumentedType(type, properties, methods, summary, remarks, example);
+        }
+
+        private static DocumentedMethod MapMethod(IMethodInfo method, XmlDocumentationModel xmlModel)
+        {
+            var parameters = new List<DocumentedParameter>();
+
+            SummaryComment summary = null;
+            RemarksComment remarks = null;
+            ExampleComment example = null;
+            ReturnsComment returns = null;
+
+            // Get the documentation for the type.
+            var member = xmlModel.Find(method.Identity);
+            if (member != null)
+            {
+                // Get the comments for the type.
+                summary = member.Comments.OfType<SummaryComment>().FirstOrDefault();
+                remarks = member.Comments.OfType<RemarksComment>().FirstOrDefault();
+                example = member.Comments.OfType<ExampleComment>().FirstOrDefault();
+                returns = member.Comments.OfType<ReturnsComment>().FirstOrDefault();
+            }
+
+            // Map parameters.
+            foreach (var parameterDefinition in method.Definition.Parameters.ToList())
+            {
+                ParamComment comment = null;
+                if (member != null)
+                {
+                    // Try to get the comment for the current parameter.
+                    comment = member.Comments.OfType<ParamComment>().FirstOrDefault(x => x.Name == parameterDefinition.Name);   
+                }                
+
+                var parameter = new DocumentedParameter(parameterDefinition, comment);
+                parameters.Add(parameter);
+            }
+
+            return new DocumentedMethod(method, parameters, summary, remarks, example, returns);
+        }
+
+        private static DocumentedProperty MapProperty(IPropertyInfo property, XmlDocumentationModel xmlModel)
+        {
+            SummaryComment summary = null;
+            RemarksComment remarks = null;
+            ExampleComment example = null;
+            ValueComment value = null;
+
+            // Get the documentation for the type.
+            var member = xmlModel.Find(property.Identity);
+            if (member != null)
+            {
+                // Get the comments for the type.
+                summary = member.Comments.OfType<SummaryComment>().SingleOrDefault();
+                remarks = member.Comments.OfType<RemarksComment>().SingleOrDefault();
+                example = member.Comments.OfType<ExampleComment>().SingleOrDefault();
+                value = member.Comments.OfType<ValueComment>().SingleOrDefault();
+            }
+
+            return new DocumentedProperty(property, summary, remarks, example, value);
+        }
+    }
+}

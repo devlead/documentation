@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B16E4D1D-3B29-4777-B679-3FDEBF7BFC65}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sparrow</RootNamespace>
+    <AssemblyName>Sparrow</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>a2e2ad56</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\Sparrow.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Sparrow.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Identity\CRefGenerator.cs" />
+    <Compile Include="Utilities\Language\CSharpLanguageProvider.cs" />
+    <Compile Include="Utilities\Resolvers\DefaultDocumentationResolver.cs" />
+    <Compile Include="Utilities\IDocumentationResolver.cs" />
+    <Compile Include="Utilities\ILanguageProvider.cs" />
+    <Compile Include="Utilities\Rendering\ISyntaxRenderer.cs" />
+    <Compile Include="Utilities\IUrlResolver.cs" />
+    <Compile Include="Utilities\Rendering\ISignatureRenderer.cs" />
+    <Compile Include="Models\Comments\Comment.cs" />
+    <Compile Include="Models\Comments\AggregateComment.cs" />
+    <Compile Include="Models\Comments\CodeComment.cs" />
+    <Compile Include="Models\Comments\ExampleComment.cs" />
+    <Compile Include="Models\Comments\ExceptionComment.cs" />
+    <Compile Include="Models\Comments\InlineCodeComment.cs" />
+    <Compile Include="Models\Comments\InlineTextComment.cs" />
+    <Compile Include="Models\Comments\ParaComment.cs" />
+    <Compile Include="Models\Comments\ParamComment.cs" />
+    <Compile Include="Models\Comments\ParamRefComment.cs" />
+    <Compile Include="Models\Comments\PermissionComment.cs" />
+    <Compile Include="Models\Comments\RemarksComment.cs" />
+    <Compile Include="Models\Comments\ReturnsComment.cs" />
+    <Compile Include="Models\Comments\SeeAlsoComment.cs" />
+    <Compile Include="Models\Comments\SeeComment.cs" />
+    <Compile Include="Models\Comments\SummaryComment.cs" />
+    <Compile Include="Models\Comments\TypeParamComment.cs" />
+    <Compile Include="Models\Comments\TypeParamRefComment.cs" />
+    <Compile Include="Models\Comments\ValueComment.cs" />
+    <Compile Include="Models\Comments\WhitespaceComment.cs" />
+    <Compile Include="Models\CommentVisitor.cs" />
+    <Compile Include="Models\Documentation\DocumentedAssembly.cs" />
+    <Compile Include="Models\Documentation\DocumentedMember.cs" />
+    <Compile Include="Models\Documentation\DocumentedMethod.cs" />
+    <Compile Include="Models\Documentation\DocumentedNamespace.cs" />
+    <Compile Include="Models\Documentation\DocumentedParameter.cs" />
+    <Compile Include="Models\Documentation\DocumentedProperty.cs" />
+    <Compile Include="Models\Documentation\DocumentedType.cs" />
+    <Compile Include="Models\Documentation\DocumentModel.cs" />
+    <Compile Include="Models\Documentation\DocumentModelExtensions.cs" />
+    <Compile Include="Reflection\MemberClassification.cs" />
+    <Compile Include="Models\DocumentModelBuilder.cs" />
+    <Compile Include="Models\DocumentModelMapper.cs" />
+    <Compile Include="Identity\CRefHelpers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Models\ReflectionModelBuilder.cs" />
+    <Compile Include="Models\Reflection\ReflectionModel.cs" />
+    <Compile Include="Reflection\MethodClassification.cs" />
+    <Compile Include="Reflection\OperatorType.cs" />
+    <Compile Include="Reflection\PropertyDefinitionExtensions.cs" />
+    <Compile Include="Utilities\Rendering\SyntaxRendererExtensions.cs" />
+    <Compile Include="Utilities\Rendering\MethodRenderOption.cs" />
+    <Compile Include="Utilities\Rendering\TypeRenderOption.cs" />
+    <Compile Include="Reflection\Signatures\MethodSignature.cs" />
+    <Compile Include="Reflection\Signatures\NamespaceSignature.cs" />
+    <Compile Include="Reflection\Signatures\ParameterSignature.cs" />
+    <Compile Include="Reflection\Signatures\PropertySignature.cs" />
+    <Compile Include="Reflection\Signatures\TypeSignature.cs" />
+    <Compile Include="Models\Reflection\IAssemblyInfo.cs" />
+    <Compile Include="Models\Reflection\IMethodInfo.cs" />
+    <Compile Include="Models\Reflection\IPropertyInfo.cs" />
+    <Compile Include="Models\Reflection\ITypeInfo.cs" />
+    <Compile Include="Models\Reflection\AssemblyInfo.cs" />
+    <Compile Include="Reflection\MethodReferenceExtensions.cs" />
+    <Compile Include="Models\Reflection\MethodInfo.cs" />
+    <Compile Include="Models\Reflection\PropertyInfo.cs" />
+    <Compile Include="Reflection\TypeClassification.cs" />
+    <Compile Include="Reflection\TypeReferenceExtensions.cs" />
+    <Compile Include="Models\Reflection\TypeInfo.cs" />
+    <Compile Include="Utilities\Rendering\CSharpSyntaxRenderer.cs" />
+    <Compile Include="SparrowException.cs" />
+    <Compile Include="Xml\CommentNodeParser.cs" />
+    <Compile Include="Xml\CommentParser.cs" />
+    <Compile Include="Xml\ICommentNodeParser.cs" />
+    <Compile Include="Xml\ICommentParser.cs" />
+    <Compile Include="Xml\Parsers\AggregateParser.cs" />
+    <Compile Include="Xml\Parsers\CodeParser.cs" />
+    <Compile Include="Xml\Parsers\ExampleParser.cs" />
+    <Compile Include="Xml\Parsers\ExceptionParser.cs" />
+    <Compile Include="Xml\Parsers\InlineCodeParser.cs" />
+    <Compile Include="Xml\Parsers\InlineTextParser.cs" />
+    <Compile Include="Xml\Parsers\ParamParser.cs" />
+    <Compile Include="Xml\Parsers\ParamRefParser.cs" />
+    <Compile Include="Xml\Parsers\ParaParser.cs" />
+    <Compile Include="Xml\Parsers\PermissionParser.cs" />
+    <Compile Include="Xml\Parsers\RemarksParser.cs" />
+    <Compile Include="Xml\Parsers\ReturnsParser.cs" />
+    <Compile Include="Xml\Parsers\SeeAlsoParser.cs" />
+    <Compile Include="Xml\Parsers\SeeParser.cs" />
+    <Compile Include="Xml\Parsers\SummaryParser.cs" />
+    <Compile Include="Xml\Parsers\TypeParamParser.cs" />
+    <Compile Include="Xml\Parsers\TypeParamRefParser.cs" />
+    <Compile Include="Xml\Parsers\ValueParser.cs" />
+    <Compile Include="Xml\Parsers\WhitespaceParser.cs" />
+    <Compile Include="Models\Xml\XmlDocumentationMember.cs" />
+    <Compile Include="Models\XmlDocumentationParser.cs" />
+    <Compile Include="Models\Xml\XmlDocumentationModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

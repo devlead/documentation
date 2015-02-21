@@ -1,0 +1,49 @@
+<!-- CLASS TABLE -->
+@if(Model.Classes.Count > 0) 
+{
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Classes</b></div>
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th class="col-md-3">Name</th>
+		            <th class="col-md-9">Description</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    	@foreach(var type in Model.Classes.OrderBy(x => x.Identity))
+		    	{
+			        <tr>
+			            <td>@Documentation.Link(type)</td>
+			            <td>@Documentation.Comment(type.Summary)</td>
+			        </tr>
+		    	}
+		    </tbody>
+		</table>
+	</div>
+}
+
+<!-- INTERFACE TABLE -->
+@if(Model.Interfaces.Count > 0) 
+{
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Interfaces</b></div>
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th class="col-md-3">Name</th>
+		            <th class="col-md-9">Description</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    	@foreach(var type in Model.Interfaces.OrderBy(x => x.Identity))
+		    	{
+			        <tr>
+			            <td>@Documentation.Link(type)</td>
+			            <td>@Documentation.Comment(type.Summary)</td>
+			        </tr>
+		    	}
+		    </tbody>
+		</table>
+	</div>
+}

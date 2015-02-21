@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BE040A11-C729-46D1-884D-57B28BA631C6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Docs.Compiler.Core</RootNamespace>
+    <AssemblyName>Docs.Compiler.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.XmlTransform">
+      <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=2.8.50926.602, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Nuget.Core.2.8.3\lib\net40-Client\NuGet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.6.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CompilerConfiguration.cs" />
+    <Compile Include="Content.cs" />
+    <Compile Include="ContentExtensions.cs" />
+    <Compile Include="Diagnostics\ConsoleLog.cs" />
+    <Compile Include="Extensions\DocumentedMemberExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="IO\Globber.cs" />
+    <Compile Include="IO\GlobberExtensions.cs" />
+    <Compile Include="IO\Globbing\Node.cs" />
+    <Compile Include="IO\Globbing\Nodes\IdentifierNode.cs" />
+    <Compile Include="IO\Globbing\Nodes\RootNode.cs" />
+    <Compile Include="IO\Globbing\Nodes\Roots\RelativeRoot.cs" />
+    <Compile Include="IO\Globbing\Nodes\Roots\UnixRoot.cs" />
+    <Compile Include="IO\Globbing\Nodes\Roots\WindowsRoot.cs" />
+    <Compile Include="IO\Globbing\Nodes\SegmentNode.cs" />
+    <Compile Include="IO\Globbing\Nodes\WildcardNode.cs" />
+    <Compile Include="IO\Globbing\Nodes\WildcardSegmentNode.cs" />
+    <Compile Include="IO\Globbing\Parser.cs" />
+    <Compile Include="IO\Globbing\Scanner.cs" />
+    <Compile Include="IO\Globbing\Token.cs" />
+    <Compile Include="IO\Globbing\TokenKind.cs" />
+    <Compile Include="IO\IGlobber.cs" />
+    <Compile Include="Nuget\INuGetInstaller.cs" />
+    <Compile Include="Nuget\NuGetInstaller.cs" />
+    <Compile Include="Nuget\PackageDefinition.cs" />
+    <Compile Include="Nuget\PackagePathResolver.cs" />
+    <Compile Include="Nuget\PackageType.cs" />
+    <Compile Include="Bootstrapping\CoreModule.cs" />
+    <Compile Include="Diagnostics\ILog.cs" />
+    <Compile Include="Diagnostics\LogExtensions.cs" />
+    <Compile Include="Diagnostics\LogLevel.cs" />
+    <Compile Include="Diagnostics\Verbosity.cs" />
+    <Compile Include="IContentGenerator.cs" />
+    <Compile Include="IO\Directory.cs" />
+    <Compile Include="IO\DirectoryPath.cs" />
+    <Compile Include="IO\DirectoryPathCollection.cs" />
+    <Compile Include="IO\Environment.cs" />
+    <Compile Include="IO\File.cs" />
+    <Compile Include="IO\FileExtensions.cs" />
+    <Compile Include="IO\FilePath.cs" />
+    <Compile Include="IO\FilePathCollection.cs" />
+    <Compile Include="IO\FileSystem.cs" />
+    <Compile Include="IO\FileSystemExtensions.cs" />
+    <Compile Include="IO\IDirectory.cs" />
+    <Compile Include="IO\IEnvironment.cs" />
+    <Compile Include="IO\IFile.cs" />
+    <Compile Include="IO\IFileSystem.cs" />
+    <Compile Include="IO\Machine.cs" />
+    <Compile Include="IO\Path.cs" />
+    <Compile Include="IO\PathCollapser.cs" />
+    <Compile Include="IO\PathComparer.cs" />
+    <Compile Include="IO\SearchScope.cs" />
+    <Compile Include="IO\SpecialPath.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>    
+    <Compile Include="Templating\EncodedStringBuilder.cs" />
+    <Compile Include="Templating\Template.cs" />
+    <Compile Include="Templating\TemplateEngine.cs" />
+    <Compile Include="Templating\TemplateHelper.cs" />
+    <Compile Include="Templating\TemplateViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sparrow\Sparrow.csproj">
+      <Project>{b16e4d1d-3b29-4777-b679-3fdebf7bfc65}</Project>
+      <Name>Sparrow</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

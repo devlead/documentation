@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E462A0CB-BAAD-4EE1-BE0B-8D8A0650B337}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sparrow.Tests</RootNamespace>
+    <AssemblyName>Sparrow.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>759a136f</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute">
+      <HintPath>..\packages\NSubstitute.1.8.1.0\lib\net45\NSubstitute.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit.abstractions">
+      <HintPath>..\packages\xunit.abstractions.2.0.0-beta5-build2785\lib\net35\xunit.abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core">
+      <HintPath>..\packages\xunit.core.2.0.0-beta5-build2785\lib\portable-net45+aspnetcore50+win+wpa81+wp80+monotouch+monoandroid\xunit.core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Fixtures\IdentityGeneratorFixture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Unit\Models\Xml\XmlDocumentationMemberTests.cs" />
+    <Compile Include="Unit\Models\Xml\XmlDocumentationParserTests.cs" />
+    <Compile Include="Unit\Xml\CommentParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\CodeParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\ExampleParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\ExceptionParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\InlineCodeParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\InlineTextParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\ParamParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\ParamRefParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\ParaParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\PermissionParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\RemarksParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\ReturnsParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\SeeAlsoParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\SeeParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\SummaryParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\TypeParamParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\TypeParamRefParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\ValueParserTests.cs" />
+    <Compile Include="Unit\Xml\Parsers\WhitespaceParserTests.cs" />
+    <Compile Include="Unit\Identity\MethodCRefGeneratorTests.cs" />
+    <Compile Include="Unit\Identity\PropertyCRefGeneratorTests.cs" />
+    <Compile Include="Unit\Identity\TypeCRefGeneratorTests.cs" />
+    <Compile Include="Unit\Reflection\MethodReferenceExtensionsTests.cs" />
+    <Compile Include="Unit\Reflection\TypeReferenceExtensionsTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sparrow.Tests.Data\Sparrow.Tests.Data.csproj">
+      <Project>{2322d37e-136d-44dd-b002-2ea5c27348c8}</Project>
+      <Name>Sparrow.Tests.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sparrow\Sparrow.csproj">
+      <Project>{b16e4d1d-3b29-4777-b679-3fdebf7bfc65}</Project>
+      <Name>Sparrow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sparrow.Testing\Sparrow.Testing.csproj">
+      <Project>{28c374bb-f598-46c4-9599-f1c1bab0f249}</Project>
+      <Name>Sparrow.Testing</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

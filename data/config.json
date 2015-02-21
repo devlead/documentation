@@ -1,0 +1,19 @@
+{
+  "output": "../build/docs",  
+  "packages": [ 
+  	{ "package": "Cake", "core": "true", "filters": [ 
+  		"/**/Cake.Core.dll", 
+  		"/**/Cake.Common.dll", 
+  		"/**/Cake.Core.xml",
+  		"/**/Cake.Common.xml" ] 
+  	},
+  	{ "package": "Cake.Slack", "filters": [ 
+  		"/**/Cake.Slack.dll", 
+  		"/**/Cake.Slack.xml" ] 
+  	},
+  	{ "package": "Cake.AliaSql", "filters": [ 
+  		"/**/Cake.AliaSql.dll", 
+  		"/**/Cake.AliaSql.xml" ] 
+  	}  	
+  ]
+}

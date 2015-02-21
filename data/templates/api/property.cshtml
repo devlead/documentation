@@ -1,0 +1,21 @@
+<!-- INHERITANCE -->
+
+<!-- SUMMARY -->
+@if(@Model.Summary != null)
+{
+	<div class="alert alert-info">
+		<p>@Documentation.Comment(@Model.Summary)</p>
+	</div>
+}
+
+<!-- PROPERTY VALUE -->
+<div class="panel panel-default">
+	<div class="panel-heading"><b>Property Value</b></div>
+	<div class="panel-body">
+		<b>Type:</b> @Documentation.Link(@Model.PropertyType)
+		@if(@Model.Property.Value != null)
+		{
+			<p><b>Value:</b> @Documentation.Comment(@Model.Value)</p>
+		}
+	</div>
+</div>	
