@@ -15,7 +15,7 @@ namespace Docs.Compiler.Generators.Api.Builders
         {
         }
 
-        protected override FilePath GetTemplate()
+        protected override FilePath GetTemplate(ApiContext context, Content parent, DocumentModel model, DslOverviewViewModel viewModel)
         {
             return "templates/api/dsl.cshtml";
         }

@@ -23,6 +23,11 @@
         /// <summary>
         /// Represents an interface.
         /// </summary>
-        Interface
+        Interface,
+
+        /// <summary>
+        /// Represents an enumeration.
+        /// </summary>
+        Enumeration
     }
 }

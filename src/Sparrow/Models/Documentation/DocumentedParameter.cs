@@ -17,7 +17,7 @@ namespace Sparrow.Models.Documentation
         private readonly bool _isRefParameter;
 
         /// <summary>
-        /// Gets the method.
+        /// Gets the declaring method.
         /// </summary>
         /// <value>The method.</value>
         public DocumentedMethod Method { get; internal set; }

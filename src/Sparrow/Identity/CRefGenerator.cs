@@ -88,13 +88,28 @@ namespace Sparrow.Identity
         /// </summary>
         /// <param name="property">The property.</param>
         /// <returns>The property's identity.</returns>
-        public static string GetProprtyCRef(PropertyDefinition property)
+        public static string GetPropertyCRef(PropertyDefinition property)
         {
             var builder = new StringBuilder();
             builder.Append("P:");
             builder.Append(property.DeclaringType.FullName);
             builder.Append(".");
             builder.Append(property.Name);
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Gets the field's identity.
+        /// </summary>
+        /// <param name="field">The field.</param>
+        /// <returns>The field's identity.</returns>
+        public static string GetFieldCRef(FieldDefinition field)
+        {
+            var builder = new StringBuilder();
+            builder.Append("F:");
+            builder.Append(field.DeclaringType.FullName);
+            builder.Append(".");
+            builder.Append(field.Name);
             return builder.ToString();
         }
     }

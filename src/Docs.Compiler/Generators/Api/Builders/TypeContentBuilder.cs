@@ -15,8 +15,12 @@ namespace Docs.Compiler.Generators.Api.Builders
         {
         }
 
-        protected override FilePath GetTemplate()
+        protected override FilePath GetTemplate(ApiContext context, Content parent, DocumentedType model, TypeViewModel viewModel)
         {
+            if (model.Definition.IsEnum)
+            {
+                return "templates/api/enum.cshtml";    
+            }
             return "templates/api/type.cshtml";
         }
 
@@ -36,6 +40,11 @@ namespace Docs.Compiler.Generators.Api.Builders
         protected override string GetLink(ApiContext context, Content parent, DocumentedType model, TypeViewModel viewModel)
         {
             return context.UrlResolver.GetLinkPart(model);
+        }
+
+        protected override string GetSubTitle(ApiContext context, Content parent, DocumentedType model, TypeViewModel viewModel)
+        {
+            return model.TypeClassification.ToString();
         }
     }
 }

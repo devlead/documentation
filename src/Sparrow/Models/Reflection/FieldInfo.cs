@@ -3,25 +3,25 @@ using Sparrow.Identity;
 
 namespace Sparrow.Models.Reflection
 {
-    internal sealed class PropertyInfo : IPropertyInfo
+    internal sealed class FieldInfo : IFieldInfo
     {
+                private readonly FieldDefinition _definition;
         private readonly string _identity;
-        private readonly PropertyDefinition _definition;
 
         public string Identity
         {
             get { return _identity; }
         }
 
-        public PropertyDefinition Definition
+        public FieldDefinition Definition
         {
             get { return _definition; }
         }
 
-        public PropertyInfo(PropertyDefinition definition)
+        public FieldInfo(FieldDefinition definition)
         {
             _definition = definition;
-            _identity = CRefGenerator.GetPropertyCRef(definition);
+            _identity = CRefGenerator.GetFieldCRef(definition);
         }
     }
 }

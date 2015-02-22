@@ -58,6 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Identity\CRefGenerator.cs" />
+    <Compile Include="Models\Documentation\DocumentedField.cs" />
+    <Compile Include="Models\Reflection\FieldInfo.cs" />
+    <Compile Include="Models\Reflection\IFieldInfo.cs" />
     <Compile Include="Utilities\Language\CSharpLanguageProvider.cs" />
     <Compile Include="Utilities\Resolvers\DefaultDocumentationResolver.cs" />
     <Compile Include="Utilities\IDocumentationResolver.cs" />

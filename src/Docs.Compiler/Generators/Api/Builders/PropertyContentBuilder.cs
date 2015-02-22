@@ -13,7 +13,7 @@ namespace Docs.Compiler.Generators.Api.Builders
         {
         }
 
-        protected override FilePath GetTemplate()
+        protected override FilePath GetTemplate(ApiContext context, Content parent, DocumentedProperty model, PropertyViewModel viewModel)
         {
             return "templates/api/property.cshtml";
         }

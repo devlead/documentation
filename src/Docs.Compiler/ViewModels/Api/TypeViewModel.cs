@@ -42,6 +42,11 @@ namespace Docs.Compiler.ViewModels.Api
             get { return _type.Operators; }
         }
 
+        public IReadOnlyList<DocumentedField> Fields
+        {
+            get { return _type.Fields; }
+        }
+
         public IReadOnlyList<DocumentedMethod> ExtensionMethods
         {
             get { return _extensionMethods; }

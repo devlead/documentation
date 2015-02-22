@@ -69,19 +69,23 @@ namespace Sparrow.Reflection
         /// <summary>
         /// Gets the type classification for this type reference.
         /// </summary>
-        /// <param name="method">The type reference.</param>
+        /// <param name="type">The type reference.</param>
         /// <returns>The type classification for this type reference.</returns>
-        public static TypeClassification GetTypeClassification(this TypeDefinition method)
+        public static TypeClassification GetTypeClassification(this TypeDefinition type)
         {
-            if (method.IsInterface)
+            if (type.IsEnum)
+            {
+                return TypeClassification.Enumeration;
+            }
+            if (type.IsInterface)
             {
                 return TypeClassification.Interface;
             }
-            if (method.IsValueType)
+            if (type.IsValueType)
             {
                 return TypeClassification.Struct;
             }
-            if (method.IsClass)
+            if (type.IsClass)
             {
                 return TypeClassification.Class;
             }

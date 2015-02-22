@@ -76,5 +76,16 @@ namespace Sparrow.Testing.Extensions
             }
             return property;
         }
+
+        public static FieldDefinition GetField(this TypeDefinition type, string name)
+        {
+            var property = type.Fields.FirstOrDefault(x => x.Name == name);
+            if (property == null)
+            {
+                var message = string.Format("Could not find field '{0}.{1}'", type.FullName, name);
+                throw new SparrowTestingException(message);
+            }
+            return property;
+        }
     }
 }

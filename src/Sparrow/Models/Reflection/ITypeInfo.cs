@@ -31,5 +31,11 @@ namespace Sparrow.Models.Reflection
         /// </summary>
         /// <value>The type's properties.</value>
         IReadOnlyList<IPropertyInfo> Properties { get; }
+
+        /// <summary>
+        /// Gets the type's fields.
+        /// </summary>
+        /// <value>The fields.</value>
+        IReadOnlyList<IFieldInfo> Fields { get; }
     }
 }

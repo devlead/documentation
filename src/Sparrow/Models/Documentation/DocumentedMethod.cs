@@ -29,9 +29,9 @@ namespace Sparrow.Models.Documentation
         }
 
         /// <summary>
-        /// Gets the type.
+        /// Gets the declaring type.
         /// </summary>
-        /// <value>The type.</value>
+        /// <value>The declaring type.</value>
         public DocumentedType Type { get; internal set; }
 
         /// <summary>

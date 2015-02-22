@@ -15,7 +15,7 @@ namespace Docs.Compiler.Generators.Api.Builders
         {
         }
 
-        protected override FilePath GetTemplate()
+        protected override FilePath GetTemplate(ApiContext context, Content parent, DocumentedMethod model, MethodViewModel viewModel)
         {
             return "templates/api/method.cshtml";
         }

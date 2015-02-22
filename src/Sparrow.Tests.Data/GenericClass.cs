@@ -17,6 +17,11 @@ namespace Sparrow.Tests.Data
         }
 
         /// <summary>
+        /// F:Sparrow.Core.Tests.Data.GenericClass`1.Field
+        /// </summary>
+        public string Field;
+
+        /// <summary>
         /// Default constructor.
         /// M:Sparrow.Core.Tests.Data.GenericClass`1.#ctor
         /// </summary>

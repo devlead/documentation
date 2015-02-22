@@ -22,7 +22,7 @@ namespace Sparrow.Reflection
             var definition = property.Resolve();
 
             // Get the property Identity and name.
-            var identity = CRefGenerator.GetProprtyCRef(definition);
+            var identity = CRefGenerator.GetPropertyCRef(definition);
             var name = definition.Name;
             var declaringType = definition.DeclaringType.GetTypeSignature(resolver);
             var propertyType = definition.PropertyType.GetTypeSignature(resolver);            

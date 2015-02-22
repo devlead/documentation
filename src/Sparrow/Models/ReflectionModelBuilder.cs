@@ -57,13 +57,20 @@ namespace Sparrow.Models
 
             // Add properties.
             var properties = new List<IPropertyInfo>();
-            var propertyDefinitions = type.Properties;
-            foreach (var property in propertyDefinitions)
+            foreach (var property in type.Properties)
             {
                 properties.Add(Build(property));
             }
 
-            return new TypeInfo(type, methods, properties);
+            // Add fields.
+            var fields = new List<IFieldInfo>();
+            var fieldDefinitions = type.Fields.Where(x => x.IsPublic || x.IsFamily || x.IsFamilyOrAssembly);
+            foreach (var field in fieldDefinitions.Where(x => !x.IsSpecialName))
+            {
+                fields.Add(Build(field));
+            }
+
+            return new TypeInfo(type, methods, properties, fields);
         }
 
         private static IMethodInfo Build(MethodDefinition method)
@@ -74,6 +81,11 @@ namespace Sparrow.Models
         private static IPropertyInfo Build(PropertyDefinition property)
         {
             return new PropertyInfo(property);
+        }
+
+        private static IFieldInfo Build(FieldDefinition field)
+        {
+            return new FieldInfo(field);
         }
     }
 }

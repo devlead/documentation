@@ -53,7 +53,7 @@ namespace Sparrow.Models
                 {
                     property.Type = documentedType;
                 }
-                
+          
                 // Add a reference to the type for every method.
                 foreach (var method in documentedType.Methods)
                 {
@@ -106,22 +106,29 @@ namespace Sparrow.Models
                 example = member.Comments.OfType<ExampleComment>().SingleOrDefault();
             }
 
-            // Map the type methods.
+            // Map the methods.
             var methods = new List<DocumentedMethod>();
             foreach (var method in type.Methods)
             {
                 methods.Add(MapMethod(method, xmlModel));
             }
 
-            // Map the type properties.
+            // Map the properties.
             var properties = new List<DocumentedProperty>();
             foreach (var property in type.Properties)
             {
                 properties.Add(MapProperty(property, xmlModel));
             }
 
+            // Map the fields.
+            var fields = new List<DocumentedField>();
+            foreach (var field in type.Fields)
+            {
+                fields.Add(MapField(field, xmlModel));
+            }
+
             // Return the documented type.
-            return new DocumentedType(type, properties, methods, summary, remarks, example);
+            return new DocumentedType(type, properties, methods, fields, summary, remarks, example);
         }
 
         private static DocumentedMethod MapMethod(IMethodInfo method, XmlDocumentationModel xmlModel)
@@ -180,6 +187,25 @@ namespace Sparrow.Models
             }
 
             return new DocumentedProperty(property, summary, remarks, example, value);
+        }
+
+        private static DocumentedField MapField(IFieldInfo field, XmlDocumentationModel xmlModel)
+        {
+            SummaryComment summary = null;
+            RemarksComment remarks = null;
+            ExampleComment example = null;
+
+            // Get the documentation for the type.
+            var member = xmlModel.Find(field.Identity);
+            if (member != null)
+            {
+                // Get the comments for the type.
+                summary = member.Comments.OfType<SummaryComment>().SingleOrDefault();
+                remarks = member.Comments.OfType<RemarksComment>().SingleOrDefault();
+                example = member.Comments.OfType<ExampleComment>().SingleOrDefault();
+            }
+
+            return new DocumentedField(field, summary, remarks, example);
         }
     }
 }

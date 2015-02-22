@@ -8,16 +8,16 @@ namespace Sparrow.Models.Reflection
     public interface IMethodInfo
     {
         /// <summary>
-        /// Gets the type Identity.
+        /// Gets the method identity.
         /// </summary>
-        /// <value>The Identity.</value>
+        /// <value>The method identity.</value>
         string Identity { get; }
 
         /// <summary>
-        /// Gets the method Definition.
+        /// Gets the method definition.
         /// </summary>
         /// <value>
-        /// The method Definition.
+        /// The method definition.
         /// </value>
         MethodDefinition Definition { get; }
     }

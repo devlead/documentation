@@ -13,7 +13,7 @@ namespace Docs.Compiler.Generators.Api.Builders
         {
         }
 
-        protected override FilePath GetTemplate()
+        protected override FilePath GetTemplate(ApiContext context, Content parent, DocumentedNamespace model, NamespaceViewModel viewModel)
         {
             return "templates/api/namespace.cshtml";
         }
@@ -31,6 +31,11 @@ namespace Docs.Compiler.Generators.Api.Builders
         protected override string GetLink(ApiContext context, Content parent, DocumentedNamespace model, NamespaceViewModel viewModel)
         {
             return context.UrlResolver.GetLinkPart(model);
+        }
+
+        protected override string GetSubTitle(ApiContext context, Content parent, DocumentedNamespace model, NamespaceViewModel viewModel)
+        {
+            return "Namespace";
         }
     }
 }

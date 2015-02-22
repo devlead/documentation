@@ -15,7 +15,7 @@ namespace Docs.Compiler.Generators.Api
             _engine = engine;
         }
 
-        protected abstract FilePath GetTemplate();
+        protected abstract FilePath GetTemplate(ApiContext context, Content parent, TModel model, TViewModel viewModel);
         protected abstract TViewModel CreateViewModel(ApiContext context, Content parent, TModel model);
         protected abstract string GetContentId(ApiContext context, Content parent, TModel model, TViewModel viewModel);
         protected abstract string GetLink(ApiContext context, Content parent, TModel model, TViewModel viewModel);
@@ -38,7 +38,7 @@ namespace Docs.Compiler.Generators.Api
         public Content Create(CompilerConfiguration configuration, ApiContext context, Content parent, TModel model)
         {
             var viewModel = CreateViewModel(context, parent, model);
-            var template = GetTemplate();
+            var template = GetTemplate(context, parent, model, viewModel);
             var body = _engine.Render(configuration, template, viewModel);
 
             return new Content(

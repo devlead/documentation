@@ -1,0 +1,40 @@
+<!-- SUMMARY -->
+@if(@Model.Summary != null)
+{
+	<div class="alert alert-info">
+		<p>@Documentation.Comment(@Model.Summary)</p>
+	</div>
+}
+
+<!-- SYNTAX -->
+<div class="panel panel-default">
+	<div class="panel-heading"><b>Syntax</b></div>
+	<div class="panel-body">
+		<pre><code class="language-cs">@Documentation.Syntax(@Model.Type)</code></pre>
+	</div>
+</div>
+
+<!-- CONSTRUCTOR TABLE -->
+@if(Model.Fields.Count > 0) 
+{
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Members</b></div>
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th class="col-md-3">Name</th>
+		            <th class="col-md-9">Description</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    	@foreach(var method in Model.Fields)
+		    	{
+			        <tr>
+			            <td>@method.Definition.Name</td>
+			            <td>@Documentation.Comment(method.Summary)</td>
+			        </tr>
+		    	}
+		    </tbody>
+		</table>
+	</div>
+}

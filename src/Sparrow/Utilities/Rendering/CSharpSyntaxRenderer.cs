@@ -50,25 +50,28 @@ namespace Sparrow.Utilities.Rendering
                 builder.Append("public");
             }
 
-            if (type.Definition.IsAbstract && type.Definition.IsSealed)
+            if (!type.Definition.IsEnum)
             {
-                builder.Append(" ");
-                builder.Append("static");
-            }
-            else
-            {
-                if (type.TypeClassification != TypeClassification.Interface)
+                if (type.Definition.IsAbstract && type.Definition.IsSealed)
                 {
-                    if (type.Definition.IsAbstract)
+                    builder.Append(" ");
+                    builder.Append("static");
+                }
+                else
+                {
+                    if (type.TypeClassification != TypeClassification.Interface)
                     {
-                        builder.Append(" ");
-                        builder.Append("abstract");
+                        if (type.Definition.IsAbstract)
+                        {
+                            builder.Append(" ");
+                            builder.Append("abstract");
+                        }
+                        else if (type.Definition.IsSealed)
+                        {
+                            builder.Append(" ");
+                            builder.Append("sealed");
+                        }
                     }
-                    else if (type.Definition.IsSealed)
-                    {
-                        builder.Append(" ");
-                        builder.Append("sealed");
-                    }                    
                 }
             }
 
