@@ -26,8 +26,8 @@
         Interface,
 
         /// <summary>
-        /// Represents an enumeration.
+        /// Represents an enum.
         /// </summary>
-        Enumeration
+        Enum
     }
 }

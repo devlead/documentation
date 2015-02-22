@@ -75,7 +75,7 @@ namespace Sparrow.Reflection
         {
             if (type.IsEnum)
             {
-                return TypeClassification.Enumeration;
+                return TypeClassification.Enum;
             }
             if (type.IsInterface)
             {
