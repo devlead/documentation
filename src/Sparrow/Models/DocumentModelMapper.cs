@@ -22,7 +22,7 @@ namespace Sparrow.Models
         public static DocumentModel Map(ReflectionModel reflectionModel, XmlDocumentationModel xmlModel)
         {
             var assemblies = new List<DocumentedAssembly>();
-            
+
             // Iterate all assemblies.
             foreach (var assembly in reflectionModel.Assemblies)
             {
@@ -53,7 +53,7 @@ namespace Sparrow.Models
                 {
                     property.Type = documentedType;
                 }
-          
+
                 // Add a reference to the type for every method.
                 foreach (var method in documentedType.Methods)
                 {
@@ -66,8 +66,18 @@ namespace Sparrow.Models
             var namespaceGroups = types.GroupBy(x => x.Definition.Namespace);
             foreach (var namespaceGroup in namespaceGroups)
             {
+                var namespaceTypes = namespaceGroup.ToList();
+
+                // Do we have a documentation for this namespace?
+                var documentation = namespaceGroup.FirstOrDefault(x => x.Definition.Name.EndsWith("NamespaceDoc"));
+                var summary = documentation != null ? documentation.Summary : null;
+                if (documentation != null)
+                {
+                    namespaceTypes.Remove(documentation);
+                }
+
                 // Create a namespace for each grouping.
-                var @namespace = new DocumentedNamespace(namespaceGroup.Key, namespaceGroup);
+                var @namespace = new DocumentedNamespace(namespaceGroup.Key, namespaceTypes, summary);
                 namespaces.Add(@namespace);
 
                 // Connect the types in this namespace to the namespace.
@@ -158,8 +168,8 @@ namespace Sparrow.Models
                 if (member != null)
                 {
                     // Try to get the comment for the current parameter.
-                    comment = member.Comments.OfType<ParamComment>().FirstOrDefault(x => x.Name == parameterDefinition.Name);   
-                }                
+                    comment = member.Comments.OfType<ParamComment>().FirstOrDefault(x => x.Name == parameterDefinition.Name);
+                }
 
                 var parameter = new DocumentedParameter(parameterDefinition, comment);
                 parameters.Add(parameter);

@@ -7,11 +7,23 @@
 {
 	<div class="panel panel-default">
 		<div class="panel-heading"><b>@Documentation.AssemblyName(assembly)</b></div>
-		<ul class="list-group">
-		    @foreach(var @namespace in assembly.Namespaces.OrderBy(x => x.Identity))
-		    {
-		    	<li class="list-group-item">@Documentation.Link(@namespace)</li>
-		    }
-		</ul>
+		<table class="table table-bordered table-striped">
+		    <tbody>		
+			    @foreach(var @namespace in assembly.Namespaces.OrderBy(x => x.Identity))
+			    {
+			        <tr>
+			            <td class="col-md-3">@Documentation.Link(@namespace)</td>
+			            @if(@namespace.Summary != null)
+			            {
+			            	<td class="col-md-9">@Documentation.Comment(@namespace.Summary)</td>
+			            }
+			            else
+			            {
+			            	<td class="col-md-9">No summary for namespace.</td>
+			            }
+			        </tr>
+			    }
+		    </tbody>
+		</table>	
 	</div>
 }

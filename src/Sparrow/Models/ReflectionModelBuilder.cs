@@ -34,7 +34,10 @@ namespace Sparrow.Models
                     }
                     if (!type.IsPublic)
                     {
-                        continue;
+                        if (!type.Name.EndsWith("NamespaceDoc"))
+                        {
+                            continue;    
+                        }
                     }
                     types.Add(Build(type));
                 }

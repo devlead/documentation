@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
+using Sparrow.Models.Comments;
 using Sparrow.Reflection;
 
 namespace Sparrow.Models.Documentation
@@ -42,8 +43,12 @@ namespace Sparrow.Models.Documentation
         /// </summary>
         /// <param name="identity">The Identity.</param>
         /// <param name="types">The types.</param>
-        public DocumentedNamespace(string identity, IEnumerable<DocumentedType> types)
-            : base(MemberClassification.Namespace, null, null, null)
+        /// <param name="summaryComment">The summary comment.</param>
+        public DocumentedNamespace(
+            string identity, 
+            IEnumerable<DocumentedType> types,
+            SummaryComment summaryComment)
+            : base(MemberClassification.Namespace, summaryComment, null, null)
         {
             _identity = identity;
             _types = new List<DocumentedType>(types);
