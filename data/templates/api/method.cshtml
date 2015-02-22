@@ -3,26 +3,53 @@
 <!-- SUMMARY -->
 @if(@Model.Summary != null)
 {
-	<div class="alert alert-info">
-		<p>@Documentation.Comment(@Model.Summary)</p>
-	</div>
+    <div class="alert alert-info">
+        <p>@Documentation.Comment(@Model.Summary)</p>
+    </div>
 }
 
 <!-- SYNTAX -->
 <div class="panel panel-default">
-	<div class="panel-heading"><b>Syntax</b></div>
-	<div class="panel-body">
-		<pre><code class="language-cs">@Documentation.Syntax(@Model.Method)</code></pre>
-	</div>
+    <div class="panel-heading"><b>Syntax</b></div>
+    <div class="panel-body">
+        <pre><code class="language-cs">@Documentation.Syntax(@Model.Method)</code></pre>
+    </div>
 </div>
+
+@if(@Model.Method.Parameters.Count > 0)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading"><b>Parameters</b></div>
+        <div class="panel-body">
+            <dl>
+                @foreach(var item in @Model.Method.Parameters)
+                {
+                    <dt><i>@item.Name</i></dt>
+                    <dd>Type: @Documentation.Link(item.Definition.ParameterType)<br />@Documentation.Comment(item.Comment)</dd>
+                }
+                </dl>
+        </div>
+    </div>
+}
+
+@if(@Model.Method.Returns != null)
+{
+    <div class="panel panel-default">
+    <div class="panel-heading"><b>Return value</b></div>
+    <div class="panel-body">
+        Type: @Documentation.Link(@Model.Method.Definition.ReturnType)<br />
+        @Documentation.Comment(@Model.Method.Returns)
+    </div>
+</div>
+}
 
 <!-- EXAMPLE -->
 @if(@Model.Example != null)
-{	
-	<div class="panel panel-default">
-		<div class="panel-heading"><b>Example</b></div>
-		<div class="panel-body">
-			<pre>@Documentation.Comment(@Model.Example)</pre>
-		</div>
-	</div>
+{   
+    <div class="panel panel-default">
+        <div class="panel-heading"><b>Example</b></div>
+        <div class="panel-body">
+            <pre>@Documentation.Comment(@Model.Example)</pre>
+        </div>
+    </div>
 }
